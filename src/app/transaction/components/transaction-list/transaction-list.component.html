@@ -1,1 +1,5 @@
-<p>transaction-list works!</p>
+<div class="container">
+  <ul *ngFor="let transaction of transactions$ | async;">
+    <li>{{transaction}}</li>
+  </ul>
+</div>

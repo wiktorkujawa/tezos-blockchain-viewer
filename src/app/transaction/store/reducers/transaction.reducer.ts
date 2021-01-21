@@ -6,47 +6,29 @@ import * as TransactionActions from '../actions/transaction.actions';
 export const transactionsFeatureKey = 'transactions';
 
 export interface TransactionState extends EntityState<Transaction> {
-  // additional entities state properties
+  error: any
 }
 
-export const adapter: EntityAdapter<Transaction> = createEntityAdapter<Transaction>();
+export const adapter: EntityAdapter<Transaction> = createEntityAdapter<Transaction>({
+  selectId: (transaction: Transaction) => transaction[length]
+});
 
 export const initialState: TransactionState = adapter.getInitialState({
-  // additional entity state properties
+  error: undefined
 });
 
 
 export const reducer = createReducer(
   initialState,
-  on(TransactionActions.addTransaction,
-    (state, action) => adapter.addOne(action.transaction, state)
-  ),
-  on(TransactionActions.upsertTransaction,
-    (state, action) => adapter.upsertOne(action.transaction, state)
-  ),
-  on(TransactionActions.addTransactions,
-    (state, action) => adapter.addMany(action.transactions, state)
-  ),
-  on(TransactionActions.upsertTransactions,
-    (state, action) => adapter.upsertMany(action.transactions, state)
-  ),
-  on(TransactionActions.updateTransaction,
-    (state, action) => adapter.updateOne(action.transaction, state)
-  ),
-  on(TransactionActions.updateTransactions,
-    (state, action) => adapter.updateMany(action.transactions, state)
-  ),
-  on(TransactionActions.deleteTransaction,
-    (state, action) => adapter.removeOne(action.id, state)
-  ),
-  on(TransactionActions.deleteTransactions,
-    (state, action) => adapter.removeMany(action.ids, state)
-  ),
-  on(TransactionActions.loadTransactions,
+  on(TransactionActions.loadTransactionsSuccess,
     (state, action) => adapter.setAll(action.transactions, state)
   ),
-  on(TransactionActions.clearTransactions,
-    state => adapter.removeAll(state)
+  on(TransactionActions.loadTransactionsFailure,
+    (state, {error}) => {
+      return { ...state,
+      error: error
+      }
+    }
   ),
 );
 
