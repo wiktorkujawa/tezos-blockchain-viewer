@@ -1,0 +1,48 @@
+$link-color: #FF4136;
+
+.navbar{
+  justify-content: space-between;
+  padding: 0 2rem;
+}
+
+span {
+  padding-right: 1rem;
+}
+
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+
+    &.active {
+      opacity: 0.6;
+      &:hover {
+        color: $link-color;
+        font-weight: 900;
+      }
+
+      &:focus {
+        opacity: 1;
+      }
+      
+  }
+}
+
+li{
+  margin-top: 2rem;
+}
+
+mat-sidenav-container {
+  height: 100%;
+}
+
+mat-sidenav{
+  width: 200px;
+}
+mat-slide-toggle {
+  padding-left: 1rem;
+}
+
+router-outlet{
+  margin: 2rem;
+}
