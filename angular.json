@@ -129,5 +129,8 @@
       }
     }
   },
-  "defaultProject": "tezos-blockchain-viewer"
+  "defaultProject": "tezos-blockchain-viewer",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
