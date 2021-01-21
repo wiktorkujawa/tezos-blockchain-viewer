@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { TransactionRoutingModule } from './transaction-routing.module';
 import { MaterialModule } from '../material/material.module';
+import { TransactionListComponent } from './components/transaction-list/transaction-list.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [TransactionListComponent],
   imports: [
     CommonModule,
     MaterialModule,
