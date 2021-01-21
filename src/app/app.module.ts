@@ -8,6 +8,9 @@ import { MaterialModule } from './material/material.module';
 import { LayoutComponent } from './layout/layout.component';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { HttpClientModule } from '@angular/common/http';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -16,11 +19,13 @@ import { StoreModule } from '@ngrx/store';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     EffectsModule.forRoot([]),
     StoreModule.forRoot({}, {}),
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent]
