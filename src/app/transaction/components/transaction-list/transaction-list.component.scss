@@ -1,5 +1,5 @@
 .example-viewport {
-  height: 484px;
+  height: 550px;
   overflow-y: scroll;
 }
 
@@ -7,11 +7,11 @@
 
 .header{
   display: flex;
-  margin-left: 1rem;
+  margin-left: .5rem;
 }
 
 mat-card{
-  padding-left: 0;
+  padding-left: 1rem;
   padding-right: 0;
   padding-bottom: 0;
 }
@@ -20,26 +20,19 @@ mat-card{
   border-radius: 20px;
   float:  left;
   clear: left;
-  padding: 0 .5rem;
-}
-
-.content {
-  background-color: white !important;
+  padding: .2rem .5rem;
 }
 
 tr{
   background-color: #F5F5F5;
   font-size: 0.8rem;
+  height: 50px;
 }
 
 th{
   font-weight: normal;
 }
 
-.example-item-detail {
-  height: 18px;
-}
-
 .example-alternate {
-  background: rgba(127, 127, 127, 0.3);
+  background: white;
 }

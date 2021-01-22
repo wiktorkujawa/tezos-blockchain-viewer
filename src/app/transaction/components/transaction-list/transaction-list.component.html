@@ -10,7 +10,7 @@
     </div>
     <mat-card-content>
   
-  <cdk-virtual-scroll-viewport [itemSize]="44" class="example-viewport" (scroll)="onScroll($event)">
+  <cdk-virtual-scroll-viewport [itemSize]="50" class="example-viewport" (scroll)="onScroll($event)">
     <div class="table-responsive">
       <table class="table table-borderless">
         <thead>
@@ -22,9 +22,9 @@
           </tr>
         </thead>
         <tbody>
-    <tr *cdkVirtualFor="let transaction of transactions$ | async;" [class.example-alternate]="transaction" class="content" > 
+    <tr *cdkVirtualFor="let transaction of transactions$ | async;" [class.example-alternate]="transaction"> 
       <td> <div class="cloud">{{transaction[2]}}</div></td>
-      <td>{{transaction[4]>0? '+':''}} {{transaction[4] | number:'1.0-1'}}  XTZ</td>
+      <td>{{transaction[4]>0? '+':''}} {{transaction[4].toFixed(1)}}  XTZ</td>
       <td>{{transaction[1] | date:'MMM d, y, h:mm'}}</td>
       <td>{{transaction[3] | slice:0:2}}...{{transaction[3] | slice:-5}}</td>
 

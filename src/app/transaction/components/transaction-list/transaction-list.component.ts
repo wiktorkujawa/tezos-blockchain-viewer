@@ -34,7 +34,7 @@ export class TransactionListComponent implements OnInit {
   }
 
   onScroll(event: any){
-    if(event.srcElement.scrollTop>(this.limit-10)*44-1)
+    if(event.srcElement.scrollTop>(this.limit-10)*50-1)
     {
       this.limit++;
       this.store.dispatch(loadTransactions({limit:this.limit}));
