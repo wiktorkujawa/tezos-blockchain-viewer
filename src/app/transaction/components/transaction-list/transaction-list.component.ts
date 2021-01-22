@@ -34,10 +34,7 @@ export class TransactionListComponent implements OnInit {
   }
 
   onScroll(event: any){
-    console.log(event);
-    console.log(`Scroll position: ${event.srcElement.scrollTop}`);
-    console.log(`Requirement: ${(this.limit-10)*44}`);
-    if(event.srcElement.scrollTop>(this.limit-10)*44)
+    if(event.srcElement.scrollTop>(this.limit-10)*44-1)
     {
       this.limit++;
       this.store.dispatch(loadTransactions({limit:this.limit}));
