@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { TransactionEffects } from './transaction.effects';
 
@@ -10,6 +11,7 @@ describe('TransactionEffects', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [ HttpClientTestingModule],
       providers: [
         TransactionEffects,
         provideMockActions(() => actions$)
