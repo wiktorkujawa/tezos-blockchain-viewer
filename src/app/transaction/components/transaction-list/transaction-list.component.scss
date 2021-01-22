@@ -1,0 +1,42 @@
+.example-viewport {
+  height: 499px;
+  // line-height: 2.5ex;
+  // height: 25ex;
+  overflow-y: scroll;
+  // border: 1px solid black;
+}
+
+
+
+.header{
+  display: flex;
+}
+
+.cloud{
+  background-color: lightgreen;
+  border-radius: 20px;
+  float:  left;
+  clear: left;
+  padding: 0 .5rem;
+}
+
+.content {
+  background-color: white !important;
+}
+
+tr{
+  background-color: #F5F5F5;
+  font-size: 0.8rem;
+}
+
+th{
+  font-weight: normal;
+}
+
+.example-item-detail {
+  height: 18px;
+}
+
+.example-alternate {
+  background: rgba(127, 127, 127, 0.3);
+}

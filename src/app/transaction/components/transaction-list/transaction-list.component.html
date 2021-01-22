@@ -1,5 +1,43 @@
 <div class="container">
-  <ul *ngFor="let transaction of transactions$ | async;">
+  <!-- <ul *ngFor="let transaction of transactions$ | async;">
     <li>{{transaction}}</li>
-  </ul>
+  </ul> -->
+
+  <mat-card class="example-card">
+    <div class="header">
+      <mat-icon>history</mat-icon>
+      <h4 style="margin-left: .5rem;">Recent Transactions</h4>
+    </div>
+    <mat-card-content>
+  
+  <cdk-virtual-scroll-viewport [itemSize]="10" class="example-viewport" (scroll)="onScroll($event)">
+    <div class="table-responsive">
+      <table class="table table-borderless">
+        <thead>
+          <tr>
+            <!-- <th>Id</th> -->
+            <th>Type</th>
+            <th>Ammount XTZ</th>
+            <th>Time</th>
+            <th>Adress</th>
+          </tr>
+        </thead>
+        <tbody>
+    <tr *cdkVirtualFor="let transaction of transactions$ | async;" [class.example-alternate]="transaction" class="content" > 
+      <!-- <td>{{transaction[0]}}</td> -->
+      <td> <div class="cloud">{{transaction[2]}}</div></td>
+      <td>{{transaction[4]>0? '+':''}} {{transaction[4] | number:'1.0-1'}}  XTZ</td>
+      <td>{{transaction[1] | date:'MMM d, y, h:mm'}}</td>
+      <td>{{transaction[3] | slice:0:2}}...{{transaction[3] | slice:-5}}</td>
+
+    </tr>
+
+  </tbody>
+  </table>
+</div>
+  </cdk-virtual-scroll-viewport>
+    </mat-card-content>
+</mat-card>
+
+  
 </div>
