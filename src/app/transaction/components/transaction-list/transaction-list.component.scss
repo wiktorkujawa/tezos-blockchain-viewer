@@ -3,15 +3,13 @@
   overflow-y: scroll;
 }
 
-
-
 .header{
   display: flex;
-  margin-left: .5rem;
+  margin-left: 1.5rem;
 }
 
 mat-card{
-  padding-left: 1rem;
+  padding-left: 0;
   padding-right: 0;
   padding-bottom: 0;
 }
@@ -29,7 +27,8 @@ tr{
   height: 50px;
 }
 
-th{
+td, th{
+  padding-left: 1.5rem;
   font-weight: normal;
 }
 
