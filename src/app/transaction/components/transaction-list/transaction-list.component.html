@@ -1,7 +1,4 @@
 <div class="container">
-  <!-- <ul *ngFor="let transaction of transactions$ | async;">
-    <li>{{transaction}}</li>
-  </ul> -->
 
   <mat-card class="example-card">
     <div class="header">
@@ -10,19 +7,19 @@
     </div>
     <mat-card-content>
   
-  <cdk-virtual-scroll-viewport [itemSize]="50" class="example-viewport" (scroll)="onScroll($event)">
+  <cdk-virtual-scroll-viewport [itemSize]="itemSize" [ngStyle]="{'height':(tableLimit+1)*itemSize + 'px'}" (scroll)="onScroll($event)">
     <div class="table-responsive">
       <table class="table table-borderless">
         <thead>
-          <tr>
+          <tr [ngStyle]="{'height': itemSize + 'px'}">
             <th>Type</th>
-            <th>Ammount XTZ</th>
+            <th>Ammount</th>
             <th>Time</th>
             <th>Adress</th>
           </tr>
         </thead>
         <tbody>
-    <tr *cdkVirtualFor="let transaction of transactions$ | async;" [class.example-alternate]="transaction"> 
+    <tr *cdkVirtualFor="let transaction of transactions$ | async;" [class.example-alternate]="transaction" [ngStyle]="{'height': itemSize +'px'}" > 
       <td> <div class="cloud">{{transaction[2]}}</div></td>
       <td>{{transaction[4]>0? '+':''}} {{transaction[4].toFixed(1)}}  XTZ</td>
       <td>{{transaction[1] | date:'MMM d, y, h:mm'}}</td>

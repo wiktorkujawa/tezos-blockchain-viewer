@@ -36,13 +36,13 @@ mat-sidenav-container {
   height: 100%;
 }
 
+mat-toolbar{
+  margin-bottom: 3rem;
+}
+
 mat-sidenav{
   width: 200px;
 }
 mat-slide-toggle {
   padding-left: 1rem;
-}
-
-router-outlet{
-  margin: 2rem;
 }
