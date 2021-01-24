@@ -1,4 +1,6 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { AboutPageComponent } from './about-page.component';
 
@@ -8,6 +10,10 @@ describe('AboutPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [
+        RouterTestingModule
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
       declarations: [ AboutPageComponent ]
     })
     .compileComponents();

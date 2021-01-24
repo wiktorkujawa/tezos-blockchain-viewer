@@ -3,6 +3,8 @@ import { StoreModule } from '@ngrx/store';
 import { TransactionListComponent } from './transaction-list.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { RouterTestingModule } from '@angular/router/testing';
+import * as fromTransaction from '../../store/reducers/transaction.reducer'; 
 
 describe('TransactionListComponent', () => {
   let component: TransactionListComponent;
@@ -11,7 +13,9 @@ describe('TransactionListComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
+        RouterTestingModule,
         ScrollingModule,
+        StoreModule.forFeature(fromTransaction.transactionsFeatureKey, fromTransaction.reducer),
         StoreModule.forRoot({})
       ],
       declarations: [ TransactionListComponent ],
