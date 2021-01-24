@@ -4,11 +4,11 @@ import { AboutPageComponent } from './about/components/about-page/about-page.com
 import { LayoutComponent } from './layout/layout.component';
 
 const routes: Routes = [
-  { path: '', 
+  { path: '',
      component: LayoutComponent,
-     children:[
+     children: [
       {
-        path: "transactions",
+        path: 'transactions',
         loadChildren: () => import('./transaction/transaction.module').then(m => m.TransactionModule)
       },
       {

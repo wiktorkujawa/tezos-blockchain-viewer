@@ -7,11 +7,11 @@ export const loadTransactions = createAction(
 );
 
 export const loadTransactionsSuccess = createAction(
-  'LOAD_TRANSACTIONS_SUCCESS[EFFECTS]', 
+  'LOAD_TRANSACTIONS_SUCCESS[EFFECTS]',
   props<{ transactions: Transaction[] }>()
 );
 
 export const loadTransactionsFailure = createAction(
-  'LOAD_TRANSACTIONS_ERROR[EFFECTS]', 
+  'LOAD_TRANSACTIONS_ERROR[EFFECTS]',
   props<{ error: any }>()
 );

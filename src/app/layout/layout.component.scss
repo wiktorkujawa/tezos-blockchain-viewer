@@ -32,12 +32,10 @@ li{
   margin-top: 2rem;
 }
 
-mat-sidenav-container {
-  height: 100%;
-}
-
-mat-toolbar{
-  margin-bottom: 3rem;
+mat-sidenav-content {
+  position: relative;
+  min-height: 100vh;
+  padding-bottom: 4rem;
 }
 
 mat-sidenav{
@@ -45,4 +43,11 @@ mat-sidenav{
 }
 mat-slide-toggle {
   padding-left: 1rem;
+}
+
+.footer{
+  font-size: 0.8rem;
+  justify-content: flex-end;
+  position: absolute;
+  bottom: 0;
 }
