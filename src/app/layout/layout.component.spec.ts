@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import {RouterTestingModule } from '@angular/router/testing';
 import { LayoutComponent } from './layout.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('LayoutComponent', () => {
   let component: LayoutComponent;
@@ -8,8 +9,9 @@ describe('LayoutComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports:[ RouterTestingModule],
-      declarations: [ LayoutComponent ]
+      imports: [ RouterTestingModule],
+      declarations: [ LayoutComponent ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
   });
@@ -23,4 +25,13 @@ describe('LayoutComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should display footer with title and year', () => {
+    const fixture = TestBed.createComponent(LayoutComponent);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement;
+    expect(compiled.querySelector('.footer span').textContent).toContain('Tezos Blockchain Viewer | 2021');
+  });
+
+
 });

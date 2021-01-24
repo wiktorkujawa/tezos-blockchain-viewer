@@ -8,9 +8,9 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  it('should display welcome message', async () => {
+  it('should display footer with title and year', async () => {
     await page.navigateTo();
-    expect(await page.getTitleText()).toEqual('tezos-blockchain-viewer app is running!');
+    expect(await page.getTitleText()).toEqual('Tezos Blockchain Viewer | 2021');
   });
 
   afterEach(async () => {

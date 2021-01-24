@@ -1,4 +1,4 @@
-import { NgModule, LOCALE_ID } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule, registerLocaleData  } from '@angular/common';
 
 import { TransactionRoutingModule } from './transaction-routing.module';
@@ -9,17 +9,17 @@ import { EffectsModule } from '@ngrx/effects';
 import * as fromTransaction from './store/reducers/transaction.reducer';
 import { TransactionEffects } from './store/effects/transaction.effects';
 import { HttpClientModule } from '@angular/common/http';
-
-import localePl from '@angular/common/locales/zu';
-registerLocaleData(localePl);
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [TransactionListComponent],
   imports: [
     CommonModule,
     MaterialModule,
     TransactionRoutingModule,
     HttpClientModule,
+    ScrollingModule,
     EffectsModule.forFeature([TransactionEffects]),
     StoreModule.forFeature(fromTransaction.transactionsFeatureKey, fromTransaction.reducer)
   ]

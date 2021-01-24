@@ -6,11 +6,12 @@ import * as TransactionActions from '../actions/transaction.actions';
 export const transactionsFeatureKey = 'transactions';
 
 export interface TransactionState extends EntityState<Transaction> {
-  error: any
+  error: any;
 }
 
 export const adapter: EntityAdapter<Transaction> = createEntityAdapter<Transaction>({
-  selectId: (transaction: Transaction) => transaction[length]
+  // First index(0) of array is the row_id which will be assigned to selectIds
+  selectId: (transaction: Transaction) => transaction[0]
 });
 
 export const initialState: TransactionState = adapter.getInitialState({
@@ -21,13 +22,15 @@ export const initialState: TransactionState = adapter.getInitialState({
 export const reducer = createReducer(
   initialState,
   on(TransactionActions.loadTransactionsSuccess,
-    (state, action) => adapter.setAll(action.transactions, state)
+    (state, action) => {
+      return adapter.setAll(action.transactions, state);
+    }
   ),
   on(TransactionActions.loadTransactionsFailure,
     (state, {error}) => {
       return { ...state,
-      error: error
-      }
+        error
+      };
     }
   ),
 );

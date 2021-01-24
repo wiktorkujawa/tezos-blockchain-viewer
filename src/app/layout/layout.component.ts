@@ -9,13 +9,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./layout.component.scss']
 })
 export class LayoutComponent implements OnInit {
-  opened: boolean=false;
-  mobile : boolean=true;
- 
+  opened = false;
+  mobile = true;
 
-  constructor( 
+  constructor(
     @Inject(DOCUMENT) private document: Document,
-    private _router:Router,
     private breakpointObserver: BreakpointObserver) {
       this.breakpointObserver.observe([
         Breakpoints.XSmall,
@@ -28,17 +26,18 @@ export class LayoutComponent implements OnInit {
           result.breakpoints[Breakpoints.XSmall] ?
             this.mobile = true :
             this.mobile = false;
-          
-        }
-      });
-    }
+          }
+        });
+      }
 
 
   ngOnInit(): void {
   }
 
-  onSwitchTheme(event:any){
-    event.checked ? this.document.body.classList.add('alternate-theme'): this.document.body.classList.remove('alternate-theme') 
+  onSwitchTheme(event: any): void {
+    event.checked ?
+    this.document.body.classList.add('alternate-theme') :
+    this.document.body.classList.remove('alternate-theme');
   }
 
 

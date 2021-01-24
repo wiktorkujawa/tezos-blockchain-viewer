@@ -1,4 +1,4 @@
 export interface Transaction {
-  [array:number]:any,
-  length: number
+  // The data is formatted as array of arrays(no properties)
+  [array: number ]: any;
 }
