@@ -21,8 +21,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     HttpClientModule,
     ScrollingModule,
     EffectsModule.forFeature([TransactionEffects]),
-    StoreModule.forFeature(fromTransaction.transactionsFeatureKey, fromTransaction.reducer),
-    StoreModule.forRoot({})
+    StoreModule.forFeature(fromTransaction.transactionsFeatureKey, fromTransaction.reducer)
   ]
 })
 export class TransactionModule { }
