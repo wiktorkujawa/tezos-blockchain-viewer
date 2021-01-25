@@ -9,7 +9,7 @@ describe('LayoutComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ RouterTestingModule],
+      imports: [ RouterTestingModule ],
       declarations: [ LayoutComponent ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
