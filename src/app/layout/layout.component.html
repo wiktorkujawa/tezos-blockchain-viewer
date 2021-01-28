@@ -1,6 +1,6 @@
-<mat-sidenav-container>
+<!-- <mat-sidenav-container>
   <mat-sidenav [(opened)]="opened">
-    <!-- Sidenav -->
+
     <ul style="list-style-type:none; margin-top: 2rem;">
     <li><a mat-button class="active" routerLink="/">Description</a></li>
     <li> <a mat-button class="active" routerLink="/transactions">Transactions</a></li>
@@ -32,4 +32,61 @@
     </mat-toolbar>
   </mat-sidenav-content>
   
+</mat-sidenav-container> -->
+
+
+
+<ng-template #menu>
+  <a mat-list-item routerLink="/">Description</a>
+  <a mat-list-item routerLink="/transactions">Transactions</a>
+</ng-template>
+
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport
+    [attr.role]="(isMobile$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isMobile$ | async) ? 'over' : 'side'"
+    [opened]="false"
+  >
+    <!-- Sidenav content  -->
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <ng-container *ngTemplateOutlet="menu"></ng-container>
+    </mat-nav-list>
+  </mat-sidenav>
+
+
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="mb-4">
+      <div>
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()"
+          *ngIf="isMobile$ | async"
+        >
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+        <a mat-button style="margin-left: 1rem" routerLink="/"> <i><img src="https://www.bitladon.pl/img/currency/XTZ_groot.png" height="50" alt=""></i></a>
+      </div>
+
+      <!-- Menu content -->
+      <div class="menu">
+        <mat-nav-list *ngIf="!(isMobile$ | async)" class="menu-links">
+          <ng-container *ngTemplateOutlet="menu"></ng-container>
+        </mat-nav-list>
+        <mat-slide-toggle (change)="onSwitchTheme($event)"></mat-slide-toggle>
+      </div>
+    </mat-toolbar>
+    
+    <router-outlet></router-outlet>
+
+    <mat-toolbar color="primary" class="footer">
+      <span>Tezos Blockchain Viewer | 2021</span>
+    </mat-toolbar>
+    
+  </mat-sidenav-content>
 </mat-sidenav-container>

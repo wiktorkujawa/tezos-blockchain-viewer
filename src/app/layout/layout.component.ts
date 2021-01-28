@@ -1,7 +1,8 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { map, shareReplay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-layout',
@@ -9,35 +10,25 @@ import { Router } from '@angular/router';
   styleUrls: ['./layout.component.scss']
 })
 export class LayoutComponent implements OnInit {
-  opened = false;
-  mobile = true;
+  isMobile$: Observable<boolean> = this.breakpointObserver
+    .observe(Breakpoints.XSmall)
+    .pipe(
+      map((result) => result.matches),
+      shareReplay()
+    );
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
-    private breakpointObserver: BreakpointObserver) {
-      this.breakpointObserver.observe([
-        Breakpoints.XSmall,
-        Breakpoints.Small,
-        Breakpoints.Medium,
-        Breakpoints.Large,
-        Breakpoints.XLarge,
-      ]).subscribe(result => {
-        if (result.matches) {
-          result.breakpoints[Breakpoints.XSmall] ?
-            this.mobile = true :
-            this.mobile = false;
-          }
-        });
-      }
+    private breakpointObserver: BreakpointObserver) {}
 
 
   ngOnInit(): void {
   }
 
-  onSwitchTheme(event: any): void {
-    event.checked ?
-    this.document.body.classList.add('alternate-theme') :
-    this.document.body.classList.remove('alternate-theme');
+  onSwitchTheme({ checked }: any) {
+    checked
+      ? this.document.body.classList.add('alternate-theme')
+      : this.document.body.classList.remove('alternate-theme');
   }
 
 
