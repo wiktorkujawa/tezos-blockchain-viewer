@@ -37,12 +37,12 @@ $hover-color: #FF4136;
 
 .menu-links {
   display: flex;
-  margin-right: 4rem;
+  margin-right: 5rem;
 }
 
 mat-slide-toggle {
   position: absolute;
-  right: 1.5rem;
+  right: 2rem;
   top:50%;
   transform: translateY(-50%);
 }
