@@ -1,10 +1,9 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
-import { ChangeDetectionStrategy, Component, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Transaction } from '../../models/transaction.model';
-import { TransactionService } from '../../services/transaction.service';
 import { loadTransactions } from '../../store/actions/transaction.actions';
 import { TransactionState } from '../../store/reducers/transaction.reducer';
 import { selectTransactions } from '../../store/selectors/transaction.selectors';
@@ -22,15 +21,21 @@ export class TransactionListComponent implements OnInit, OnDestroy {
   @ViewChild(CdkVirtualScrollViewport) virtualScroll!: CdkVirtualScrollViewport;
 
   limit = 10;
-  intervalId = setInterval(() => this.loadNewTransactions(), 10000);
 
   tableLimit = 10;
   itemSize = 50;
 
   transactions: Transaction[] = [];
   constructor(
+    private changeDetector: ChangeDetectorRef,
     private store: Store<TransactionState>,
     private breakpointObserver: BreakpointObserver) {
+      setInterval(() => {
+        this.loadNewTransactions();
+        this.changeDetector.markForCheck();
+      } , 5000);
+      clearInterval();
+
       this.breakpointObserver.observe([
         '(max-width: 450px)',
         Breakpoints.XSmall,
@@ -62,9 +67,8 @@ export class TransactionListComponent implements OnInit, OnDestroy {
     this.loadNewTransactions();
   }
 
-  onScroll(event: any): void {
-    if ( event.srcElement.scrollTop > (this.limit - this.tableLimit) * this.itemSize)
-    {
+  onScroll(): void {
+    if(this.virtualScroll.measureScrollOffset('bottom') === 0){
       this.limit++;
       this.store.dispatch(loadTransactions({limit: this.limit}));
       this.transactions$ = this.store.pipe(select(selectTransactions));
@@ -72,7 +76,7 @@ export class TransactionListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    clearInterval(this.intervalId);
+    // clearInterval(this.intervalId);
   }
 
   loadNewTransactions(): void {
