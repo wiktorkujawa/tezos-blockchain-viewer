@@ -1,6 +1,6 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { DOCUMENT } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, DoCheck, Inject, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 
@@ -9,7 +9,7 @@ import { map, shareReplay } from 'rxjs/operators';
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss']
 })
-export class LayoutComponent implements OnInit {
+export class LayoutComponent implements OnInit, DoCheck {
   isMobile$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.XSmall)
     .pipe(
@@ -20,6 +20,9 @@ export class LayoutComponent implements OnInit {
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private breakpointObserver: BreakpointObserver) {}
+  ngDoCheck(): void {
+    console.log('layout');
+  }
 
 
   ngOnInit(): void {

@@ -1,6 +1,6 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DoCheck, HostListener, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Transaction } from '../../models/transaction.model';
@@ -14,7 +14,7 @@ import { selectTransactions } from '../../store/selectors/transaction.selectors'
   styleUrls: ['./transaction-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TransactionListComponent implements OnInit, OnDestroy {
+export class TransactionListComponent implements OnInit, DoCheck {
 
   transactions$!: Observable<Transaction[]>;
 
@@ -29,13 +29,15 @@ export class TransactionListComponent implements OnInit, OnDestroy {
   constructor(
     private changeDetector: ChangeDetectorRef,
     private store: Store<TransactionState>,
-    private breakpointObserver: BreakpointObserver) {
+    private breakpointObserver: BreakpointObserver,
+    private ngZone: NgZone) {
       setInterval(() => {
         this.loadNewTransactions();
         this.changeDetector.markForCheck();
-      } , 5000);
-      clearInterval();
+      } , 10000);
 
+
+      ngZone.runOutsideAngular( () =>
       this.breakpointObserver.observe([
         '(max-width: 450px)',
         Breakpoints.XSmall,
@@ -60,23 +62,23 @@ export class TransactionListComponent implements OnInit, OnDestroy {
             this.tableLimit = 10
           );
         }
-      });
+      }))
+
+
     }
+  ngDoCheck(): void {
+    console.log('Whatever')
+  }
 
   ngOnInit(): void {
-    this.loadNewTransactions();
+    this.ngZone.runOutsideAngular( () => this.loadNewTransactions());
   }
 
   onScroll(): void {
     if(this.virtualScroll.measureScrollOffset('bottom') === 0){
-      this.limit++;
-      this.store.dispatch(loadTransactions({limit: this.limit}));
+      this.store.dispatch(loadTransactions({limit: this.limit++}));
       this.transactions$ = this.store.pipe(select(selectTransactions));
     }
-  }
-
-  ngOnDestroy(): void {
-    // clearInterval(this.intervalId);
   }
 
   loadNewTransactions(): void {
