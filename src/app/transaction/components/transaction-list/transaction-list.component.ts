@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DoCheck, HostLis
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Transaction } from '../../models/transaction.model';
-import { loadTransactions } from '../../store/actions/transaction.actions';
+import { loadTransactions, loadNextTransactions } from '../../store/actions/transaction.actions';
 import { TransactionState } from '../../store/reducers/transaction.reducer';
 import { selectTransactions } from '../../store/selectors/transaction.selectors';
 
@@ -14,13 +14,11 @@ import { selectTransactions } from '../../store/selectors/transaction.selectors'
   styleUrls: ['./transaction-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TransactionListComponent implements OnInit, DoCheck {
+export class TransactionListComponent implements OnInit {
 
   transactions$!: Observable<Transaction[]>;
 
   @ViewChild(CdkVirtualScrollViewport) virtualScroll!: CdkVirtualScrollViewport;
-
-  limit = 10;
 
   tableLimit = 10;
   itemSize = 50;
@@ -31,10 +29,10 @@ export class TransactionListComponent implements OnInit, DoCheck {
     private store: Store<TransactionState>,
     private breakpointObserver: BreakpointObserver,
     private ngZone: NgZone) {
-      setInterval(() => {
-        this.loadNewTransactions();
-        this.changeDetector.markForCheck();
-      } , 10000);
+      // setInterval(() => {
+      //   this.loadNewTransactions();
+      //   this.changeDetector.markForCheck();
+      // } , 10000);
 
 
       ngZone.runOutsideAngular( () =>
@@ -63,12 +61,7 @@ export class TransactionListComponent implements OnInit, DoCheck {
           );
         }
       }))
-
-
     }
-  ngDoCheck(): void {
-    console.log('Whatever')
-  }
 
   ngOnInit(): void {
     this.ngZone.runOutsideAngular( () => this.loadNewTransactions());
@@ -76,13 +69,13 @@ export class TransactionListComponent implements OnInit, DoCheck {
 
   onScroll(): void {
     if(this.virtualScroll.measureScrollOffset('bottom') === 0){
-      this.store.dispatch(loadTransactions({limit: this.limit++}));
+      this.store.dispatch(loadNextTransactions());
       this.transactions$ = this.store.pipe(select(selectTransactions));
     }
   }
 
   loadNewTransactions(): void {
-    this.store.dispatch(loadTransactions({limit: this.limit}));
+    this.store.dispatch(loadTransactions());
     this.transactions$ = this.store.pipe(select(selectTransactions));
   }
 }
