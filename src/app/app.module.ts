@@ -4,14 +4,14 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './material/material.module';
-import { LayoutComponent } from './layout/layout.component';
+import { MaterialModule } from './modules/shared/material/material.module';
+import { LayoutComponent } from './modules/public/layout/layout.component';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
-import { AboutPageComponent } from './about/components/about-page/about-page.component';
+import { AboutPageComponent } from './modules/public/components/about/components/about-page/about-page.component';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
