@@ -9,7 +9,7 @@ import { map, shareReplay } from 'rxjs/operators';
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss']
 })
-export class LayoutComponent implements OnInit, DoCheck {
+export class LayoutComponent implements OnInit {
   isMobile$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.XSmall)
     .pipe(
@@ -20,10 +20,6 @@ export class LayoutComponent implements OnInit, DoCheck {
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private breakpointObserver: BreakpointObserver) {}
-  ngDoCheck(): void {
-    console.log('layout');
-  }
-
 
   ngOnInit(): void {
   }

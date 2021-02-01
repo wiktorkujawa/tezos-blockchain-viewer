@@ -14,7 +14,7 @@ import { selectTransactions } from '../../store/selectors/transaction.selectors'
   styleUrls: ['./transaction-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TransactionListComponent implements OnInit, DoCheck {
+export class TransactionListComponent implements OnInit {
 
   transactions$!: Observable<Transaction[]>;
 
@@ -66,9 +66,6 @@ export class TransactionListComponent implements OnInit, DoCheck {
 
 
     }
-  ngDoCheck(): void {
-    console.log('Whatever')
-  }
 
   ngOnInit(): void {
     this.ngZone.runOutsideAngular( () => this.loadNewTransactions());
