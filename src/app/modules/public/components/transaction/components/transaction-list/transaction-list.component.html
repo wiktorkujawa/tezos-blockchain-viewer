@@ -7,7 +7,7 @@
     </div>
     <mat-card-content>
   
-  <cdk-virtual-scroll-viewport [itemSize]="itemSize" [ngStyle]="{'height':(tableLimit+1)*itemSize + 'px'}" (scroll)="onScroll($event)">
+  <cdk-virtual-scroll-viewport [itemSize]="itemSize" [ngStyle]="{'height':(tableLimit+1)*itemSize + 'px'}" (scroll)="onScroll()" #virtualScroll>
     <div class="table-responsive">
       <table class="table table-borderless">
         <thead>

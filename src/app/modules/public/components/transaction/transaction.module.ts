@@ -1,8 +1,8 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { CommonModule, registerLocaleData  } from '@angular/common';
+import { CommonModule } from '@angular/common';
 
 import { TransactionRoutingModule } from './transaction-routing.module';
-import { MaterialModule } from '../material/material.module';
+import { MaterialModule } from '../../../shared/material/material.module';
 import { TransactionListComponent } from './components/transaction-list/transaction-list.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
