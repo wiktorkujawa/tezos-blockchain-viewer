@@ -36,12 +36,14 @@
       </div>
 
       <!-- Menu content -->
-      <div class="menu">
-        <mat-nav-list *ngIf="!(isMobile$ | async)" class="menu-links">
-          <ng-container *ngTemplateOutlet="menu"></ng-container>
+        <mat-nav-list class="menu">
+          <div style="display: flex;" *ngIf="!(isMobile$ | async)">
+            <ng-container *ngTemplateOutlet="menu"></ng-container>
+          </div>
+          <a mat-list-item>
+            <mat-slide-toggle (change)="onSwitchTheme($event)"></mat-slide-toggle>
+          </a>
         </mat-nav-list>
-        <mat-slide-toggle (change)="onSwitchTheme($event)"></mat-slide-toggle>
-      </div>
     </mat-toolbar>
     
     <router-outlet></router-outlet>
